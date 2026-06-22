@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { useEffect } from "react";
 
 const products = [
   {
@@ -169,8 +170,6 @@ const trustItems = [
 ];
 
 export default function HomePage() {
-  const aosRefs = useRef<HTMLElement[]>([]);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -225,62 +224,49 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right — visual */}
+            {/* Right — product bottle */}
             <div className="relative hidden lg:flex items-center justify-center">
+              {/* Soft background glow */}
               <div
-                className="w-[420px] h-[520px] rounded-3xl flex items-center justify-center"
-                style={{ backgroundColor: "#EDE8E0" }}
+                className="w-[480px] h-[560px] rounded-3xl relative flex items-center justify-center overflow-hidden"
+                style={{ backgroundColor: "#EDE8DF" }}
               >
-                {/* Abstract cellular visualization */}
-                <div className="relative w-64 h-64">
-                  {/* Outer rings */}
-                  <div className="absolute inset-0 rounded-full border border-nuclora-gold/30 animate-pulse" />
-                  <div
-                    className="absolute inset-4 rounded-full border border-nuclora-gold/20"
-                    style={{ animationDelay: "0.5s" }}
+                {/* Subtle ring behind bottle */}
+                <div className="absolute w-80 h-80 rounded-full border border-nuclora-gold/15" />
+                <div className="absolute w-56 h-56 rounded-full border border-nuclora-gold/10" />
+
+                {/* Bottle image */}
+                <div className="relative z-10 w-72 h-[420px]">
+                  <Image
+                    src="/nmn-bottle.png"
+                    alt="Nuclora NMN 500mg — Cellular Longevity"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority
                   />
-                  <div className="absolute inset-8 rounded-full border border-nuclora-navy/10" />
-                  {/* Center */}
-                  <div className="absolute inset-12 rounded-full bg-nuclora-navy/5 flex items-center justify-center">
-                    <div
-                      className="text-center"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
-                    >
-                      <div className="text-5xl font-light text-nuclora-navy/40">N</div>
-                    </div>
-                  </div>
-                  {/* Floating dots */}
-                  {[
-                    { top: "8%", left: "48%", size: 6 },
-                    { top: "25%", left: "88%", size: 4 },
-                    { top: "72%", left: "90%", size: 5 },
-                    { top: "88%", left: "50%", size: 4 },
-                    { top: "72%", left: "10%", size: 6 },
-                    { top: "25%", left: "12%", size: 4 },
-                  ].map((dot, i) => (
-                    <div
-                      key={i}
-                      className="absolute rounded-full bg-nuclora-gold/60"
-                      style={{
-                        top: dot.top,
-                        left: dot.left,
-                        width: dot.size,
-                        height: dot.size,
-                      }}
-                    />
-                  ))}
                 </div>
               </div>
-              {/* Badge */}
-              <div
-                className="absolute bottom-12 left-4 px-5 py-4 rounded-2xl shadow-lg"
-                style={{ backgroundColor: "#fff" }}
-              >
+
+              {/* Floating badge */}
+              <div className="absolute bottom-10 -left-4 bg-white px-5 py-4 rounded-2xl shadow-xl border border-nuclora-border">
                 <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-1">
+                  Flagship Formula
+                </p>
+                <p
+                  className="text-lg font-light text-nuclora-navy"
+                  style={{ fontFamily: "var(--font-cormorant)" }}
+                >
+                  NMN 500mg
+                </p>
+              </div>
+
+              {/* Second badge */}
+              <div className="absolute top-10 -right-2 bg-nuclora-navy px-4 py-3 rounded-xl shadow-lg">
+                <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">
                   Made with precision
                 </p>
                 <p
-                  className="text-xl font-light text-nuclora-navy"
+                  className="text-sm font-light text-white"
                   style={{ fontFamily: "var(--font-cormorant)" }}
                 >
                   in Australia
@@ -380,20 +366,30 @@ export default function HomePage() {
                 <div className="product-card-hover rounded-2xl overflow-hidden border border-nuclora-border bg-white">
                   {/* Image area */}
                   <div
-                    className="relative h-56 flex items-center justify-center"
+                    className="relative h-64 flex items-center justify-center overflow-hidden"
                     style={{ backgroundColor: product.accent }}
                   >
-                    <div
-                      className="text-center p-6"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
-                    >
-                      <div className="text-6xl font-light text-nuclora-navy/20 mb-1">
-                        {product.name.charAt(0)}
+                    {i === 0 ? (
+                      <div className="relative w-36 h-52">
+                        <Image
+                          src="/nmn-bottle.png"
+                          alt={product.name}
+                          fill
+                          className="object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+                        />
                       </div>
-                      <div className="text-sm font-light text-nuclora-navy/40 tracking-wide">
-                        {product.tagline}
+                    ) : (
+                      <div className="text-center p-6" style={{ fontFamily: "var(--font-cormorant)" }}>
+                        <div className="w-24 h-32 mx-auto rounded-2xl border border-nuclora-navy/10 flex flex-col items-center justify-center gap-2 bg-white/40">
+                          <div className="text-4xl font-light text-nuclora-navy/25">
+                            {product.name.charAt(0)}
+                          </div>
+                          <div className="text-xs font-light text-nuclora-navy/30 tracking-wide px-2 text-center leading-tight">
+                            {product.tagline}
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    )}
                     {/* Tag */}
                     <span className="absolute top-4 left-4 px-3 py-1 bg-white/80 backdrop-blur-sm text-nuclora-navy text-xs font-medium tracking-wider uppercase rounded-full">
                       {product.tag}
