@@ -1,229 +1,348 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Nuclora — Advanced Cellular Nutrition Backed by Science",
-  description:
-    "Premium science-driven nutritional supplements engineered for cellular health, longevity, performance, and wellness. Pharmaceutical-grade quality. Uncompromising standards.",
-};
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 const products = [
   {
-    slug: "cellular-nad-complex",
+    id: "cellular-nad-complex",
     name: "Cellular NAD+ Complex",
-    category: "Longevity",
-    tagline: "Restore cellular energy from within.",
+    tagline: "Cellular Energy & Longevity",
     price: "$89",
-    highlight: "NMN + NR + Resveratrol",
+    description:
+      "Pharmaceutical-grade NMN + NR complex to replenish NAD+ levels, support mitochondrial function, and promote healthy cellular aging.",
+    tag: "Best Seller",
+    accent: "#E8E2D9",
   },
   {
-    slug: "omega-3-ultra",
-    name: "Omega-3 Ultra Pure",
-    category: "Foundation",
-    tagline: "Clinical-grade essential fatty acids.",
+    id: "omega-3-ultra",
+    name: "Omega-3 Ultra",
+    tagline: "Cardiovascular & Cognitive Health",
     price: "$54",
-    highlight: "Triglyceride Form · Molecularly Distilled",
+    description:
+      "Ultra-pure triglyceride-form fish oil with 3000mg EPA+DHA per serving. Molecularly distilled, free of heavy metals and oxidation products.",
+    tag: "Pure Formula",
+    accent: "#DCE4E0",
   },
   {
-    slug: "mitochondrial-activator",
+    id: "mitochondrial-activator",
     name: "Mitochondrial Activator",
-    category: "Performance",
-    tagline: "Peak energy. Peak focus. Peak output.",
+    tagline: "Energy, Endurance & Recovery",
     price: "$74",
-    highlight: "CoQ10 + PQQ + Alpha Lipoic Acid",
+    description:
+      "CoQ10, PQQ, L-Carnitine, and Alpha Lipoic Acid synergistically formulated to optimise mitochondrial biogenesis and cellular energy output.",
+    tag: "Advanced",
+    accent: "#E4DDD6",
   },
-];
-
-const stats = [
-  { value: "48", unit: "Research Papers", label: "Reviewed per Formula" },
-  { value: "99.7%", unit: "Purity", label: "Pharmaceutical-Grade" },
-  { value: "12+", unit: "Testing", label: "Panels Per Batch" },
-  { value: "0", unit: "Additives", label: "Fillers, Dyes or Binders" },
+  {
+    id: "sleep-recovery-complex",
+    name: "Sleep & Recovery Complex",
+    tagline: "Deep Sleep & Cellular Repair",
+    price: "$62",
+    description:
+      "Magnesium glycinate, L-Theanine, Ashwagandha, and pharmaceutical-grade Melatonin to restore sleep architecture and accelerate cellular recovery.",
+    tag: "Recovery",
+    accent: "#D8DCE4",
+  },
+  {
+    id: "cognitive-clarity",
+    name: "Cognitive Clarity",
+    tagline: "Focus, Memory & Mental Performance",
+    price: "$79",
+    description:
+      "Lion's Mane, Bacopa Monnieri, and Phosphatidylserine — clinically studied nootropics for neuroplasticity, recall, and sustained focus.",
+    tag: "Cognitive",
+    accent: "#E2E0DA",
+  },
+  {
+    id: "vitamin-d3-k2",
+    name: "Vitamin D3 + K2",
+    tagline: "Immune, Bone & Cardiovascular Support",
+    price: "$38",
+    description:
+      "5000 IU D3 paired with 200mcg MK-7 K2 for optimal calcium metabolism, immune regulation, and cardiovascular protection.",
+    tag: "Foundation",
+    accent: "#E6E0D8",
+  },
 ];
 
 const testimonials = [
   {
-    quote:
-      "The most transparent supplement brand I've encountered. The research behind each formula is genuinely world-class.",
-    name: "Dr. Marcus Chen",
-    title: "Sports Medicine Physician",
+    name: "Dr. Aidan Walsh",
+    role: "Sports Medicine Physician",
+    text: "I recommend Nuclora to my patients who are serious about longevity and performance. The formulations are precise, the sourcing is transparent, and the quality is pharmaceutical-grade.",
+    initials: "AW",
   },
   {
-    quote:
-      "I've been taking the NAD+ Complex for six months. My recovery metrics have improved measurably and the cognitive clarity is real.",
-    name: "Serena Walsh",
-    title: "Professional Triathlete",
+    name: "Priya Mehta",
+    role: "CEO & Biohacker",
+    text: "Three months in — my energy is consistently higher, brain fog is gone, and my bloodwork shows measurable improvements. This is the real thing.",
+    initials: "PM",
   },
   {
-    quote:
-      "As a longevity researcher, I hold supplements to an extremely high bar. Nuclora meets it in every category.",
-    name: "Prof. Lena Hoffmann",
-    title: "Cellular Biology, Stanford",
+    name: "James Thornton",
+    role: "Endurance Athlete",
+    text: "The Mitochondrial Activator and Sleep Complex have transformed my recovery. These aren't just supplements — they're tools for optimisation.",
+    initials: "JT",
   },
 ];
 
-const pillars = [
+const pricingTiers = [
   {
-    number: "01",
-    title: "Evidence-First",
-    body: "Every ingredient is selected based on peer-reviewed research. We don't follow trends — we follow the science.",
+    name: "Essential",
+    price: "$89",
+    period: "per month",
+    description: "Begin your cellular health journey with our flagship formula.",
+    features: [
+      "Cellular NAD+ Complex",
+      "Monthly supply (60 capsules)",
+      "Certificate of Analysis",
+      "Free shipping",
+    ],
+    cta: "Start with Essential",
+    highlighted: false,
   },
   {
-    number: "02",
-    title: "Pharmaceutical Purity",
-    body: "Manufactured in FDA-registered, GMP-certified facilities. Each batch is third-party tested for potency and contaminants.",
+    name: "Bundle",
+    price: "$229",
+    period: "per month",
+    description: "The complete longevity stack for serious optimisers.",
+    features: [
+      "NAD+ Complex + Omega-3 Ultra",
+      "Mitochondrial Activator",
+      "Priority dispatch",
+      "Personalised protocol guide",
+      "15% savings",
+    ],
+    cta: "Choose Bundle",
+    highlighted: true,
   },
   {
-    number: "03",
-    title: "Bioavailability Engineered",
-    body: "Forms that your body actually absorbs. We use the most bioavailable versions of each nutrient, not the cheapest.",
+    name: "Complete System",
+    price: "$289",
+    period: "per month",
+    description: "Every formula. Maximum impact. The full Nuclora system.",
+    features: [
+      "All 6 Nuclora formulas",
+      "Quarterly blood panel consultation",
+      "Dedicated health advisor",
+      "20% savings",
+      "VIP early access",
+    ],
+    cta: "Get Complete System",
+    highlighted: false,
+  },
+];
+
+const standards = [
+  {
+    num: "01",
+    title: "Scientific Integrity",
+    body: "Every formulation is grounded in peer-reviewed research and clinical evidence. We cite our sources. We never compromise on the science.",
   },
   {
-    number: "04",
-    title: "Complete Transparency",
-    body: "Every ingredient, every dose, every source — fully disclosed. No proprietary blends. No hidden fillers.",
+    num: "02",
+    title: "Uncompromising Quality",
+    body: "Premium, bioavailable ingredients — third-party tested with full transparency on every label. GMP certified facilities only.",
   },
+  {
+    num: "03",
+    title: "Long-Term Thinking",
+    body: "We optimise for decades, not days. Health is a lifelong investment, and every Nuclora formula reflects that philosophy.",
+  },
+  {
+    num: "04",
+    title: "Radical Transparency",
+    body: "No proprietary blends. No hidden fillers. Full ingredient disclosure on every product, every batch, every time.",
+  },
+];
+
+const trustItems = [
+  "THIRD-PARTY TESTED",
+  "NO UNNECESSARY FILLERS",
+  "CLINICALLY INFORMED FORMULAS",
+  "TRANSPARENT SOURCING",
+  "GMP CERTIFIED",
+  "PHARMACEUTICAL-GRADE",
+  "BIOAVAILABLE INGREDIENTS",
+  "MADE WITH PRECISION",
 ];
 
 export default function HomePage() {
+  const aosRefs = useRef<HTMLElement[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll(".aos");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <>
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center bg-white overflow-hidden">
-        {/* Background accent */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-nuclora-cream opacity-60" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-nuclora-teal/5 -translate-x-1/2 translate-y-1/2" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <p className="label-sm mb-6">Advanced Cellular Nutrition</p>
-            <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-light leading-[1.1] text-nuclora-navy mb-8"
-              style={{ fontFamily: "var(--font-cormorant)" }}
-            >
-              Engineered
-              <br />
-              for the
-              <br />
-              <em className="text-nuclora-teal not-italic">cellular age.</em>
-            </h1>
-            <p className="text-lg font-light text-nuclora-muted leading-relaxed max-w-md mb-10">
-              Nuclora develops precision nutrition backed by cutting-edge
-              science — formulated to optimize your cells, extend your health
-              span, and unlock your full potential.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/products" className="btn-primary">
-                Explore Formulas
-              </Link>
-              <Link href="/science" className="btn-outline">
-                Our Science
-              </Link>
+    <main>
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section className="min-h-screen bg-nuclora-ivory flex flex-col justify-center pt-20">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center py-20">
+            {/* Left — text */}
+            <div>
+              <p className="label-gold mb-6">Cellular Longevity Science</p>
+              <h1
+                className="heading-hero mb-8"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                Precision
+                <br />
+                Nutrition.
+                <br />
+                <span className="italic font-light">Clinically</span>
+                <br />
+                Informed.
+              </h1>
+              <p className="body-lg max-w-md mb-10">
+                Advanced cellular nutrition formulated from peer-reviewed science.
+                No shortcuts. No compromises. Just science-backed formulas for those
+                who invest in their health for the long term.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/products" className="btn-gold">
+                  Explore the Collection
+                </Link>
+                <Link href="/science" className="btn-outline">
+                  The Science
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Product visual placeholder */}
-          <div className="relative flex justify-center md:justify-end">
-            <div className="relative w-80 h-96 md:w-96 md:h-[480px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-nuclora-cream to-nuclora-light-gray rounded-sm" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                <div className="w-24 h-24 rounded-full bg-nuclora-teal/20 flex items-center justify-center">
-                  <div className="w-14 h-14 rounded-full bg-nuclora-teal/40" />
+            {/* Right — visual */}
+            <div className="relative hidden lg:flex items-center justify-center">
+              <div
+                className="w-[420px] h-[520px] rounded-3xl flex items-center justify-center"
+                style={{ backgroundColor: "#EDE8E0" }}
+              >
+                {/* Abstract cellular visualization */}
+                <div className="relative w-64 h-64">
+                  {/* Outer rings */}
+                  <div className="absolute inset-0 rounded-full border border-nuclora-gold/30 animate-pulse" />
+                  <div
+                    className="absolute inset-4 rounded-full border border-nuclora-gold/20"
+                    style={{ animationDelay: "0.5s" }}
+                  />
+                  <div className="absolute inset-8 rounded-full border border-nuclora-navy/10" />
+                  {/* Center */}
+                  <div className="absolute inset-12 rounded-full bg-nuclora-navy/5 flex items-center justify-center">
+                    <div
+                      className="text-center"
+                      style={{ fontFamily: "var(--font-cormorant)" }}
+                    >
+                      <div className="text-5xl font-light text-nuclora-navy/40">N</div>
+                    </div>
+                  </div>
+                  {/* Floating dots */}
+                  {[
+                    { top: "8%", left: "48%", size: 6 },
+                    { top: "25%", left: "88%", size: 4 },
+                    { top: "72%", left: "90%", size: 5 },
+                    { top: "88%", left: "50%", size: 4 },
+                    { top: "72%", left: "10%", size: 6 },
+                    { top: "25%", left: "12%", size: 4 },
+                  ].map((dot, i) => (
+                    <div
+                      key={i}
+                      className="absolute rounded-full bg-nuclora-gold/60"
+                      style={{
+                        top: dot.top,
+                        left: dot.left,
+                        width: dot.size,
+                        height: dot.size,
+                      }}
+                    />
+                  ))}
                 </div>
-                <p
-                  className="text-2xl font-light text-nuclora-navy text-center px-8"
-                  style={{ fontFamily: "var(--font-cormorant)" }}
-                >
-                  Cellular NAD+
-                  <br />
-                  Complex
-                </p>
-                <p className="text-xs font-light tracking-widest uppercase text-nuclora-muted">
-                  30 Day Supply
-                </p>
-                <p
-                  className="text-3xl font-light text-nuclora-navy"
-                  style={{ fontFamily: "var(--font-cormorant)" }}
-                >
-                  $89
-                </p>
               </div>
               {/* Badge */}
-              <div className="absolute top-6 left-6 px-3 py-1.5 bg-nuclora-navy text-white text-xs font-light tracking-wider">
-                Bestseller
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <p className="text-xs font-light tracking-widest uppercase text-nuclora-muted">
-            Scroll
-          </p>
-          <div className="w-px h-12 bg-gradient-to-b from-nuclora-muted to-transparent" />
-        </div>
-      </section>
-
-      {/* TRUST BAR */}
-      <section className="bg-nuclora-navy py-6">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex flex-wrap items-center justify-center md:justify-between gap-6 md:gap-4">
-            {[
-              "GMP Certified Manufacturing",
-              "Third-Party Tested Every Batch",
-              "NSF Certified for Sport",
-              "Pharmaceutical-Grade Purity",
-              "Free from Artificial Additives",
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-2">
-                <svg
-                  className="w-4 h-4 text-nuclora-teal flex-shrink-0"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span className="text-xs font-light tracking-wider text-white/70">
-                  {item}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* STATS */}
-      <section className="section-pad bg-nuclora-cream">
-        <div className="container-tight">
-          <div className="text-center mb-16">
-            <p className="label-sm mb-4">By the Numbers</p>
-            <h2 className="heading-xl">
-              Standards that set
-              <br />
-              the industry benchmark.
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x divide-nuclora-border">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center px-8">
+              <div
+                className="absolute bottom-12 left-4 px-5 py-4 rounded-2xl shadow-lg"
+                style={{ backgroundColor: "#fff" }}
+              >
+                <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-1">
+                  Made with precision
+                </p>
                 <p
-                  className="text-5xl md:text-6xl font-light text-nuclora-navy mb-1"
+                  className="text-xl font-light text-nuclora-navy"
                   style={{ fontFamily: "var(--font-cormorant)" }}
                 >
-                  {stat.value}
+                  in Australia
                 </p>
-                <p className="text-sm font-medium text-nuclora-teal tracking-wide mb-1">
-                  {stat.unit}
-                </p>
-                <p className="text-xs font-light text-nuclora-muted tracking-wide">
-                  {stat.label}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── MARQUEE TRUST BAR ──────────────────────────────────── */}
+      <section className="bg-nuclora-navy py-5 overflow-hidden">
+        <div className="marquee-track">
+          {[...trustItems, ...trustItems].map((item, i) => (
+            <span
+              key={i}
+              className="inline-flex items-center gap-6 px-8 text-xs font-medium tracking-widest text-white/60 whitespace-nowrap"
+            >
+              {item}
+              <span className="w-1 h-1 rounded-full bg-nuclora-gold/60" />
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* ── STANDARDS / COMMITMENT ─────────────────────────────── */}
+      <section className="bg-nuclora-navy section-pad">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="mb-20 aos">
+            <p className="label-gold mb-4">Our Commitment</p>
+            <h2
+              className="heading-display text-white max-w-2xl"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              The Standard We Hold Ourselves To
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
+            {standards.map((s, i) => (
+              <div
+                key={s.num}
+                className={`aos aos-delay-${i + 1} bg-nuclora-navy p-10 hover:bg-white/5 transition-colors duration-300`}
+              >
+                <div
+                  className="text-7xl font-light leading-none mb-6"
+                  style={{
+                    fontFamily: "var(--font-cormorant)",
+                    color: "rgba(184,144,106,0.2)",
+                  }}
+                >
+                  {s.num}
+                </div>
+                <div className="w-8 h-px bg-nuclora-gold/50 mb-5" />
+                <h3
+                  className="text-xl font-light text-white mb-4"
+                  style={{ fontFamily: "var(--font-cormorant)" }}
+                >
+                  {s.title}
+                </h3>
+                <p className="text-sm font-light text-white/50 leading-relaxed">
+                  {s.body}
                 </p>
               </div>
             ))}
@@ -231,88 +350,77 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS */}
-      <section className="section-pad bg-white">
-        <div className="container-tight">
-          <div className="flex items-end justify-between mb-14">
+      {/* ── PRODUCTS ───────────────────────────────────────────── */}
+      <section className="bg-nuclora-ivory section-pad">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 aos">
             <div>
-              <p className="label-sm mb-4">Featured Formulas</p>
-              <h2 className="heading-xl">
-                Precision-crafted
-                <br />
-                for every goal.
+              <p className="label-gold mb-3">The Collection</p>
+              <h2
+                className="heading-display"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                The Core Collection
               </h2>
             </div>
-            <Link
-              href="/products"
-              className="hidden md:inline-flex text-sm font-medium text-nuclora-teal hover:text-nuclora-navy transition-colors items-center gap-2"
-            >
-              View All
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
+            <Link href="/products" className="btn-outline self-start md:self-auto">
+              View All Products
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {products.map((product) => (
+          {/* Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product, i) => (
               <Link
-                key={product.slug}
-                href={`/products/${product.slug}`}
-                className="product-card group block"
+                key={product.id}
+                href={`/products/${product.id}`}
+                className={`aos aos-delay-${(i % 3) + 1} group`}
               >
-                {/* Image */}
-                <div className="relative h-72 bg-nuclora-cream overflow-hidden mb-5">
-                  <div className="product-img w-full h-full flex flex-col items-center justify-center gap-3">
-                    <div className="w-20 h-20 rounded-full bg-nuclora-teal/20 flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-nuclora-teal/40" />
-                    </div>
-                    <p
-                      className="text-xl font-light text-nuclora-navy text-center px-6"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
-                    >
-                      {product.name}
-                    </p>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-white text-nuclora-navy text-xs font-medium tracking-wider">
-                      {product.category}
-                    </span>
-                  </div>
-                </div>
-                {/* Info */}
-                <div>
-                  <p className="text-xs font-light tracking-wide text-nuclora-teal mb-1">
-                    {product.highlight}
-                  </p>
-                  <h3
-                    className="text-2xl font-light text-nuclora-navy mb-2 group-hover:text-nuclora-teal transition-colors"
-                    style={{ fontFamily: "var(--font-cormorant)" }}
+                <div className="product-card-hover rounded-2xl overflow-hidden border border-nuclora-border bg-white">
+                  {/* Image area */}
+                  <div
+                    className="relative h-56 flex items-center justify-center"
+                    style={{ backgroundColor: product.accent }}
                   >
-                    {product.name}
-                  </h3>
-                  <p className="text-sm font-light text-nuclora-muted mb-4">
-                    {product.tagline}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span
-                      className="text-2xl font-light text-nuclora-navy"
+                    <div
+                      className="text-center p-6"
                       style={{ fontFamily: "var(--font-cormorant)" }}
                     >
-                      {product.price}
+                      <div className="text-6xl font-light text-nuclora-navy/20 mb-1">
+                        {product.name.charAt(0)}
+                      </div>
+                      <div className="text-sm font-light text-nuclora-navy/40 tracking-wide">
+                        {product.tagline}
+                      </div>
+                    </div>
+                    {/* Tag */}
+                    <span className="absolute top-4 left-4 px-3 py-1 bg-white/80 backdrop-blur-sm text-nuclora-navy text-xs font-medium tracking-wider uppercase rounded-full">
+                      {product.tag}
                     </span>
-                    <span className="text-xs font-medium tracking-widest uppercase text-nuclora-teal group-hover:text-nuclora-navy transition-colors">
-                      Learn More →
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-7">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3
+                        className="text-xl font-light text-nuclora-navy leading-snug"
+                        style={{ fontFamily: "var(--font-cormorant)" }}
+                      >
+                        {product.name}
+                      </h3>
+                      <span className="text-nuclora-gold font-medium text-sm ml-4 whitespace-nowrap">
+                        {product.price}
+                      </span>
+                    </div>
+                    <p className="text-sm font-light text-nuclora-muted leading-relaxed mb-5">
+                      {product.description}
+                    </p>
+                    <span className="inline-flex items-center text-xs font-medium tracking-widest uppercase text-nuclora-navy group-hover:text-nuclora-gold transition-colors duration-300">
+                      Learn More
+                      <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -322,63 +430,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SCIENCE SECTION */}
-      <section className="section-pad bg-nuclora-navy overflow-hidden">
-        <div className="container-tight">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-xs font-medium tracking-widest uppercase text-nuclora-teal mb-6">
-                Our Approach
-              </p>
+      {/* ── SCIENCE CTA ────────────────────────────────────────── */}
+      <section className="bg-nuclora-navy section-pad">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid lg:grid-cols-4 gap-16 items-start">
+            <div className="lg:col-span-2 aos">
+              <p className="label-gold mb-5">Why Nuclora</p>
               <h2
-                className="text-4xl md:text-5xl font-light text-white leading-tight mb-8"
+                className="text-5xl md:text-6xl font-light leading-tight text-white mb-6"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
-                Nutrition as
-                <br />
-                a precision science.
+                Science-Driven.{" "}
+                <span className="italic">Uncompromisingly</span>{" "}
+                Pure.
               </h2>
-              <p className="text-base font-light text-white/60 leading-relaxed mb-6">
-                We begin with the peer-reviewed literature. Every Nuclora
-                formula is built on decades of cellular biology research,
-                validated by clinical studies, and reviewed by independent
-                scientists before a single capsule is manufactured.
+              <p className="text-base font-light text-white/60 leading-relaxed mb-8 max-w-md">
+                Every Nuclora formula begins with a clinical question, not a
+                marketing brief. We study the science, select the most bioavailable
+                forms of each nutrient, and formulate with exactness.
               </p>
-              <p className="text-base font-light text-white/60 leading-relaxed mb-10">
-                The result is nutrition that works at the molecular level —
-                supporting mitochondrial function, NAD+ metabolism, cellular
-                repair, and longevity pathways your body already knows how to
-                use.
-              </p>
-              <Link
-                href="/science"
-                className="inline-flex items-center gap-2 px-8 py-4 border border-nuclora-teal text-nuclora-teal text-xs font-medium tracking-widest uppercase hover:bg-nuclora-teal hover:text-white transition-all duration-300"
-              >
-                Explore Our Science
+              <Link href="/science" className="btn-outline-white">
+                Explore the Science
               </Link>
             </div>
 
-            {/* Pillars */}
-            <div className="grid grid-cols-1 gap-6">
-              {pillars.map((pillar) => (
-                <div
-                  key={pillar.number}
-                  className="flex gap-6 p-6 border border-white/10 hover:border-nuclora-teal/40 transition-colors duration-300"
-                >
-                  <span
-                    className="text-3xl font-light text-nuclora-teal/50 flex-shrink-0"
+            <div className="lg:col-span-2 grid grid-cols-2 gap-px bg-white/10 aos aos-delay-2">
+              {[
+                { stat: "100+", label: "Clinical studies referenced" },
+                { stat: "6", label: "Precision formulas" },
+                { stat: "0", label: "Unnecessary fillers" },
+                { stat: "3rd", label: "Party tested, every batch" },
+              ].map((item, i) => (
+                <div key={i} className="bg-nuclora-navy p-8">
+                  <div
+                    className="text-5xl font-light text-nuclora-gold mb-3"
                     style={{ fontFamily: "var(--font-cormorant)" }}
                   >
-                    {pillar.number}
-                  </span>
-                  <div>
-                    <h4 className="text-base font-medium text-white mb-1">
-                      {pillar.title}
-                    </h4>
-                    <p className="text-sm font-light text-white/50 leading-relaxed">
-                      {pillar.body}
-                    </p>
+                    {item.stat}
                   </div>
+                  <p className="text-sm font-light text-white/50">
+                    {item.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -386,39 +478,54 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="section-pad bg-white">
-        <div className="container-tight">
-          <div className="text-center mb-14">
-            <p className="label-sm mb-4">Trusted By</p>
-            <h2 className="heading-xl">
-              What experts
-              <br />& athletes say.
+      {/* ── TESTIMONIALS ───────────────────────────────────────── */}
+      <section className="bg-nuclora-cream section-pad">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16 aos">
+            <p className="label-gold mb-3">Testimonials</p>
+            <h2
+              className="heading-display"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              Trusted by High Performers
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t) => (
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
               <div
                 key={t.name}
-                className="p-8 bg-nuclora-cream border border-nuclora-border"
+                className={`aos aos-delay-${i + 1} bg-white rounded-2xl p-8 border border-nuclora-border`}
               >
-                <svg
-                  className="w-8 h-8 text-nuclora-teal/40 mb-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-                <p className="text-base font-light text-nuclora-navy leading-relaxed mb-6 italic">
-                  &ldquo;{t.quote}&rdquo;
+                {/* Stars */}
+                <div className="flex gap-1 mb-6">
+                  {[...Array(5)].map((_, j) => (
+                    <svg
+                      key={j}
+                      className="w-4 h-4 text-nuclora-gold fill-current"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+
+                <p className="text-base font-light text-nuclora-charcoal leading-relaxed mb-8 italic">
+                  &ldquo;{t.text}&rdquo;
                 </p>
-                <div className="pt-6 border-t border-nuclora-border">
-                  <p className="text-sm font-medium text-nuclora-navy">
-                    {t.name}
-                  </p>
-                  <p className="text-xs font-light text-nuclora-muted">
-                    {t.title}
-                  </p>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-nuclora-navy flex items-center justify-center">
+                    <span className="text-xs font-medium text-white tracking-wider">
+                      {t.initials}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-nuclora-navy">
+                      {t.name}
+                    </p>
+                    <p className="text-xs text-nuclora-muted">{t.role}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -426,30 +533,154 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA BANNER */}
-      <section className="py-24 bg-nuclora-cream">
-        <div className="container-tight text-center">
-          <p className="label-sm mb-6">Begin Your Protocol</p>
-          <h2
-            className="text-4xl md:text-5xl font-light text-nuclora-navy leading-tight mb-6"
-            style={{ fontFamily: "var(--font-cormorant)" }}
-          >
-            Your cells are waiting.
-          </h2>
-          <p className="text-lg font-light text-nuclora-muted max-w-xl mx-auto mb-10">
-            Start with a formula matched to your goals. Every Nuclora product
-            ships with a complete ingredient breakdown and research summary.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/products" className="btn-teal">
-              Shop All Formulas
-            </Link>
-            <Link href="/faq" className="btn-outline">
-              Common Questions
-            </Link>
+      {/* ── PRICING ────────────────────────────────────────────── */}
+      <section className="bg-nuclora-ivory section-pad">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16 aos">
+            <p className="label-gold mb-3">Pricing</p>
+            <h2
+              className="heading-display"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              Choose Your Formula
+            </h2>
+            <p className="body-base mt-4 max-w-md mx-auto">
+              Every tier is backed by the same uncompromising science and quality.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {pricingTiers.map((tier, i) => (
+              <div
+                key={tier.name}
+                className={`aos aos-delay-${i + 1} rounded-2xl p-8 border flex flex-col ${
+                  tier.highlighted
+                    ? "bg-nuclora-navy border-nuclora-navy"
+                    : "bg-white border-nuclora-border"
+                }`}
+              >
+                {tier.highlighted && (
+                  <span className="self-start px-3 py-1 bg-nuclora-gold/20 text-nuclora-gold text-xs font-medium tracking-widest uppercase rounded-full mb-4">
+                    Most Popular
+                  </span>
+                )}
+                <h3
+                  className={`text-2xl font-light mb-2 ${
+                    tier.highlighted ? "text-white" : "text-nuclora-navy"
+                  }`}
+                  style={{ fontFamily: "var(--font-cormorant)" }}
+                >
+                  {tier.name}
+                </h3>
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span
+                    className={`text-5xl font-light ${
+                      tier.highlighted ? "text-white" : "text-nuclora-navy"
+                    }`}
+                    style={{ fontFamily: "var(--font-cormorant)" }}
+                  >
+                    {tier.price}
+                  </span>
+                  <span
+                    className={`text-sm ${
+                      tier.highlighted ? "text-white/50" : "text-nuclora-muted"
+                    }`}
+                  >
+                    {tier.period}
+                  </span>
+                </div>
+                <p
+                  className={`text-sm font-light mb-8 leading-relaxed ${
+                    tier.highlighted ? "text-white/60" : "text-nuclora-muted"
+                  }`}
+                >
+                  {tier.description}
+                </p>
+
+                <ul className="space-y-3 mb-10 flex-1">
+                  {tier.features.map((f) => (
+                    <li
+                      key={f}
+                      className={`flex items-start gap-3 text-sm font-light ${
+                        tier.highlighted ? "text-white/70" : "text-nuclora-charcoal"
+                      }`}
+                    >
+                      <span className="w-4 h-4 mt-0.5 flex-shrink-0 rounded-full border flex items-center justify-center"
+                        style={{
+                          borderColor: tier.highlighted ? "rgba(184,144,106,0.5)" : "#B8906A",
+                        }}
+                      >
+                        <svg
+                          className="w-2 h-2"
+                          fill="none"
+                          viewBox="0 0 8 8"
+                          stroke={tier.highlighted ? "rgba(184,144,106,0.8)" : "#B8906A"}
+                          strokeWidth="2"
+                        >
+                          <path d="M1.5 4l1.5 1.5 3-3" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href="/products"
+                  className={`w-full text-center py-3.5 text-xs font-medium tracking-widest uppercase rounded-full transition-all duration-300 ${
+                    tier.highlighted
+                      ? "bg-nuclora-gold text-white hover:bg-white hover:text-nuclora-navy"
+                      : "border border-nuclora-navy text-nuclora-navy hover:bg-nuclora-navy hover:text-white"
+                  }`}
+                >
+                  {tier.cta}
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-    </>
+
+      {/* ── COMMUNITY / CTA ────────────────────────────────────── */}
+      <section className="bg-nuclora-navy section-pad">
+        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <p className="label-gold mb-5 aos">Begin Your Journey</p>
+          <h2
+            className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight text-white mb-6 aos aos-delay-1"
+            style={{ fontFamily: "var(--font-cormorant)" }}
+          >
+            Your cellular health
+            <br />
+            <span className="italic">starts today.</span>
+          </h2>
+          <p className="body-base text-white/60 mb-12 max-w-md mx-auto aos aos-delay-2">
+            Join thousands of high performers who take a proactive, science-driven
+            approach to their long-term health.
+          </p>
+
+          {/* Email capture */}
+          <form
+            className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto mb-8 aos aos-delay-3"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 px-6 py-4 bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm font-light rounded-full focus:outline-none focus:border-nuclora-gold transition-colors"
+            />
+            <button
+              type="submit"
+              className="btn-gold whitespace-nowrap"
+            >
+              Subscribe
+            </button>
+          </form>
+
+          <p className="text-xs text-white/30 aos aos-delay-4">
+            Science updates, launch access, and exclusive protocols. Unsubscribe anytime.
+          </p>
+        </div>
+      </section>
+    </main>
   );
 }

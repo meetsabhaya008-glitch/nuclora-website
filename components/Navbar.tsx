@@ -5,11 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const navLinks = [
+  { label: "Shop", href: "/products" },
   { label: "Science", href: "/science" },
-  { label: "Products", href: "/products" },
-  { label: "Ingredients", href: "/ingredients" },
-  { label: "Quality", href: "/quality" },
   { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 export default function Navbar() {
@@ -26,13 +25,13 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md border-b border-nuclora-border shadow-sm"
+          ? "bg-nuclora-ivory/95 backdrop-blur-md border-b border-nuclora-border shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center flex-shrink-0">
           <Image
             src="/nuclora logo.png"
             alt="Nuclora"
@@ -49,20 +48,17 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs font-medium tracking-widest uppercase text-nuclora-navy hover:text-nuclora-teal transition-colors duration-200"
+              className="text-xs font-medium tracking-widest uppercase text-nuclora-navy hover:text-nuclora-gold transition-colors duration-200"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* CTA */}
-        <div className="hidden md:flex items-center gap-4">
-          <Link
-            href="/products"
-            className="px-6 py-3 bg-nuclora-navy text-white text-xs font-medium tracking-widest uppercase hover:bg-nuclora-teal transition-colors duration-300"
-          >
-            Shop Now
+        {/* CTA — pill button */}
+        <div className="hidden md:flex items-center">
+          <Link href="/products" className="btn-primary">
+            Pre-Order Now
           </Link>
         </div>
 
@@ -92,7 +88,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-white border-t border-nuclora-border transition-all duration-300 overflow-hidden ${
+        className={`md:hidden bg-nuclora-ivory border-t border-nuclora-border transition-all duration-300 overflow-hidden ${
           menuOpen ? "max-h-screen" : "max-h-0"
         }`}
       >
@@ -101,7 +97,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs font-medium tracking-widest uppercase text-nuclora-navy hover:text-nuclora-teal transition-colors"
+              className="text-xs font-medium tracking-widest uppercase text-nuclora-navy hover:text-nuclora-gold transition-colors"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
@@ -109,10 +105,10 @@ export default function Navbar() {
           ))}
           <Link
             href="/products"
-            className="mt-2 px-6 py-3 bg-nuclora-navy text-white text-xs font-medium tracking-widest uppercase text-center hover:bg-nuclora-teal transition-colors"
+            className="btn-primary text-center justify-center"
             onClick={() => setMenuOpen(false)}
           >
-            Shop Now
+            Pre-Order Now
           </Link>
         </nav>
       </div>

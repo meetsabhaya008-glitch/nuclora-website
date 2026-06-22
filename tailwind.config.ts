@@ -10,15 +10,17 @@ const config: Config = {
     extend: {
       colors: {
         nuclora: {
-          navy: "#0A0F1E",
+          navy: "#131929",
           teal: "#2D6A5A",
           "teal-light": "#3D8A76",
-          gold: "#C4973B",
-          "gold-light": "#D4A84B",
-          cream: "#F8F7F4",
-          "light-gray": "#F1F0ED",
-          border: "#E5E4E0",
-          muted: "#6B7280",
+          gold: "#B8906A",
+          "gold-light": "#C9A47A",
+          cream: "#F7F4EF",
+          ivory: "#FAF8F4",
+          "light-gray": "#F0EDE8",
+          border: "#E8E4DE",
+          muted: "#7A756E",
+          charcoal: "#2A2520",
         },
       },
       fontFamily: {
@@ -32,6 +34,7 @@ const config: Config = {
       animation: {
         "fade-up": "fadeUp 0.6s ease forwards",
         "fade-in": "fadeIn 0.4s ease forwards",
+        marquee: "marquee 30s linear infinite",
       },
       keyframes: {
         fadeUp: {
@@ -41,6 +44,10 @@ const config: Config = {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },
