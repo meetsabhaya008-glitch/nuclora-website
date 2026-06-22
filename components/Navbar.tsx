@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Science", href: "/science" },
@@ -31,16 +32,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-nuclora-navy hover:text-nuclora-teal transition-colors"
-        >
-          <span
-            className="text-2xl font-light tracking-[0.15em] uppercase"
-            style={{ fontFamily: "var(--font-cormorant)" }}
-          >
-            Nuclora
-          </span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/nuclora logo.png"
+            alt="Nuclora"
+            width={140}
+            height={50}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}

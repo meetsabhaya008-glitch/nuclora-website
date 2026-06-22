@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks = {
   Products: [
@@ -60,12 +61,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link href="/" className="inline-block mb-6">
-              <span
-                className="text-2xl font-light tracking-[0.15em] uppercase text-white"
-                style={{ fontFamily: "var(--font-cormorant)" }}
-              >
-                Nuclora
-              </span>
+              <Image
+                src="/nuclora logo.png"
+                alt="Nuclora"
+                width={140}
+                height={50}
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </Link>
             <p className="text-sm font-light text-white/60 leading-relaxed max-w-xs mb-8">
               Advanced cellular nutrition backed by science. Formulated for
