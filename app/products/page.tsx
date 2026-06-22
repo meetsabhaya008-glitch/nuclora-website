@@ -1,92 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { allProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
   description:
     "Explore Nuclora's complete line of science-driven nutritional supplements engineered for cellular health, longevity, performance, and recovery.",
 };
-
-export const allProducts = [
-  {
-    slug: "cellular-nad-complex",
-    name: "Cellular NAD+ Complex",
-    category: "Longevity",
-    tagline: "Restore cellular energy from within.",
-    description:
-      "Our flagship formula combining NMN, NR, resveratrol, and pterostilbene to restore NAD+ levels and activate longevity pathways. Built on the most robust longevity research available.",
-    price: "$89",
-    priceNote: "30-day supply / 60 capsules",
-    highlight: "NMN 500mg · NR 300mg · Resveratrol 250mg",
-    badge: "Bestseller",
-    color: "teal",
-  },
-  {
-    slug: "omega-3-ultra",
-    name: "Omega-3 Ultra Pure",
-    category: "Foundation",
-    tagline: "Clinical-grade essential fatty acids.",
-    description:
-      "Triglyceride-form omega-3s from sustainably sourced cold-water fish. Molecularly distilled, IFOS-certified, delivering 2000mg EPA+DHA per serving — the dose used in clinical research.",
-    price: "$54",
-    priceNote: "30-day supply / 60 softgels",
-    highlight: "2000mg EPA/DHA · Triglyceride Form",
-    badge: null,
-    color: "gold",
-  },
-  {
-    slug: "mitochondrial-activator",
-    name: "Mitochondrial Activator",
-    category: "Performance",
-    tagline: "Peak energy. Peak focus. Peak output.",
-    description:
-      "A synergistic complex of CoQ10 ubiquinol, PQQ, and alpha-lipoic acid to support mitochondrial biogenesis, electron transport efficiency, and cellular energy production.",
-    price: "$74",
-    priceNote: "30-day supply / 30 capsules",
-    highlight: "CoQ10 200mg · PQQ 20mg · R-ALA 300mg",
-    badge: "New",
-    color: "navy",
-  },
-  {
-    slug: "sleep-recovery-complex",
-    name: "Sleep & Recovery Complex",
-    category: "Recovery",
-    tagline: "Repair happens at night.",
-    description:
-      "A pharmaceutical-grade blend of magnesium glycinate, L-theanine, and ashwagandha to support deep sleep architecture, cortisol regulation, and overnight cellular repair.",
-    price: "$62",
-    priceNote: "30-day supply / 60 capsules",
-    highlight: "Magnesium 400mg · L-Theanine 200mg",
-    badge: null,
-    color: "teal",
-  },
-  {
-    slug: "cognitive-clarity",
-    name: "Cognitive Clarity",
-    category: "Cognition",
-    tagline: "Sharper. Faster. Sustained.",
-    description:
-      "Formulated with Lion's Mane, phosphatidylserine, and bacopa monnieri to support neuroplasticity, memory consolidation, and sustained cognitive performance.",
-    price: "$69",
-    priceNote: "30-day supply / 60 capsules",
-    highlight: "Lion's Mane 1000mg · PS 300mg",
-    badge: null,
-    color: "gold",
-  },
-  {
-    slug: "vitamin-d3-k2",
-    name: "D3 + K2 Protocol",
-    category: "Foundation",
-    tagline: "The vitamins that work together.",
-    description:
-      "5000 IU of cholecalciferol D3 paired with 200mcg MK-7 K2 in a single softgel. The complete combination for bone health, immune function, and cardiovascular support.",
-    price: "$38",
-    priceNote: "90-day supply / 90 softgels",
-    highlight: "D3 5000 IU · K2 MK-7 200mcg",
-    badge: "Best Value",
-    color: "navy",
-  },
-];
 
 const categories = ["All", "Longevity", "Performance", "Foundation", "Recovery", "Cognition"];
 
