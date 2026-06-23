@@ -226,31 +226,51 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Bottle card — clean, no overlapping badges */}
-            <div
-              className="rounded-3xl flex items-center justify-center mx-auto overflow-hidden"
-              style={{ backgroundColor: "#EDE8DF", height: "320px", width: "100%" }}
-            >
-              <div className="relative w-44 h-60">
-                <Image
-                  src="/nmn-bottle.png"
-                  alt="Nuclora NMN 500mg"
-                  fill
-                  className="object-contain drop-shadow-2xl"
-                  priority
-                />
+            {/* Integrated bottle card — image + info bar as one unit */}
+            <div className="rounded-3xl overflow-hidden mx-auto w-full" style={{ border: "1px solid #E8E3DA" }}>
+              {/* Bottle image area */}
+              <div
+                className="flex items-center justify-center"
+                style={{ backgroundColor: "#EDE8DF", height: "300px" }}
+              >
+                <div className="relative w-44 h-56">
+                  <Image
+                    src="/nmn-bottle.png"
+                    alt="Nuclora NMN 500mg"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Info strip below the bottle card */}
-            <div className="flex items-center justify-between mt-3 px-1">
-              <div>
-                <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold">Flagship Formula</p>
-                <p className="text-lg font-light text-nuclora-navy" style={{ fontFamily: "var(--font-cormorant)" }}>NMN 500mg</p>
-              </div>
-              <div className="bg-nuclora-navy rounded-xl px-4 py-2.5 text-right">
-                <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold">Made in</p>
-                <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>India</p>
+              {/* Info bar — flush bottom of card */}
+              <div
+                className="flex items-center justify-between px-5 py-4"
+                style={{ backgroundColor: "#131929" }}
+              >
+                <div>
+                  <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold mb-0.5">
+                    Flagship Formula
+                  </p>
+                  <p
+                    className="text-xl font-light text-white"
+                    style={{ fontFamily: "var(--font-cormorant)" }}
+                  >
+                    NMN 500mg
+                  </p>
+                </div>
+                <div className="text-right border-l border-white/10 pl-5">
+                  <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold mb-0.5">
+                    Made in
+                  </p>
+                  <p
+                    className="text-xl font-light text-white"
+                    style={{ fontFamily: "var(--font-cormorant)" }}
+                  >
+                    India
+                  </p>
+                </div>
               </div>
             </div>
           </div>
