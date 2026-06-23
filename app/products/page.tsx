@@ -1,203 +1,171 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { allProducts } from "@/lib/products";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Products",
-  description:
-    "Explore Nuclora's complete line of science-driven nutritional supplements engineered for cellular health, longevity, performance, and recovery.",
-};
-
-const categories = ["All", "Longevity", "Performance", "Foundation", "Recovery", "Cognition"];
+import Image from "next/image";
+import { useEffect } from "react";
 
 export default function ProductsPage() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".aos").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const formulas = [
+    { name: "Cellular NAD+ Complex", tagline: "Cellular Energy & Longevity" },
+    { name: "Omega-3 Ultra", tagline: "Cardiovascular & Cognitive Health" },
+    { name: "Mitochondrial Activator", tagline: "Energy, Endurance & Recovery" },
+    { name: "Sleep & Recovery Complex", tagline: "Deep Sleep & Cellular Repair" },
+    { name: "Cognitive Clarity", tagline: "Focus, Memory & Mental Performance" },
+    { name: "Vitamin D3 + K2", tagline: "Immune, Bone & Cardiovascular Support" },
+  ];
+
   return (
-    <>
-      {/* HERO */}
-      <section className="pt-40 pb-20 bg-nuclora-cream">
-        <div className="container-tight">
-          <div className="max-w-2xl">
-            <p className="label-sm mb-6">All Formulas</p>
-            <h1
-              className="text-5xl md:text-6xl font-light text-nuclora-navy leading-tight mb-6"
+    <main>
+      {/* ── HERO ── */}
+      <section className="min-h-screen bg-nuclora-navy flex items-center pt-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full py-24">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+
+            {/* Left */}
+            <div>
+              <p className="label-gold mb-6 aos">The Collection</p>
+              <h1
+                className="text-6xl md:text-7xl lg:text-8xl font-light leading-none text-white mb-8 aos aos-delay-1"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                Coming
+                <br />
+                <span className="italic text-nuclora-gold">Soon.</span>
+              </h1>
+              <p className="text-lg font-light text-white/60 leading-relaxed max-w-md mb-10 aos aos-delay-2">
+                Six precision formulas. Clinically informed. Uncompromisingly pure.
+                Crafted for those who invest in their health for the long term.
+              </p>
+
+              {/* Email signup */}
+              <form
+                className="flex flex-col sm:flex-row gap-3 max-w-md aos aos-delay-3"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <input
+                  type="email"
+                  placeholder="Your email for early access"
+                  className="flex-1 px-6 py-4 bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm font-light rounded-full focus:outline-none focus:border-nuclora-gold transition-colors"
+                />
+                <button type="submit" className="btn-gold whitespace-nowrap">
+                  Notify Me
+                </button>
+              </form>
+              <p className="text-xs text-white/30 mt-4 aos aos-delay-4">
+                Early access members receive an exclusive launch discount.
+              </p>
+            </div>
+
+            {/* Right — bottle */}
+            <div className="relative flex items-center justify-center aos aos-delay-2">
+              <div className="absolute w-80 h-80 rounded-full border border-nuclora-gold/10" />
+              <div className="absolute w-56 h-56 rounded-full border border-nuclora-gold/15" />
+              <div
+                className="relative w-72 h-[420px] rounded-3xl flex items-center justify-center"
+                style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
+              >
+                <div className="relative w-52 h-[360px]">
+                  <Image
+                    src="/nmn-bottle.png"
+                    alt="Nuclora — Coming Soon"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FORMULA LIST ── */}
+      <section className="bg-nuclora-ivory py-28">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16 aos">
+            <p className="label-gold mb-3">What&apos;s Coming</p>
+            <h2
+              className="heading-display"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
-              Science for every goal.
-            </h1>
-            <p className="text-lg font-light text-nuclora-muted leading-relaxed">
-              Each Nuclora formula is built on peer-reviewed evidence, dosed at
-              clinically-validated levels, and manufactured to pharmaceutical
-              standards. No exceptions.
-            </p>
+              Six formulas. One system.
+            </h2>
           </div>
 
-          {/* Category filter */}
-          <div className="flex flex-wrap gap-3 mt-12">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                className={`px-5 py-2.5 text-xs font-medium tracking-widest uppercase border transition-colors duration-200 ${
-                  cat === "All"
-                    ? "bg-nuclora-navy text-white border-nuclora-navy"
-                    : "bg-transparent text-nuclora-navy border-nuclora-border hover:border-nuclora-navy"
-                }`}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-nuclora-border">
+            {formulas.map((formula, i) => (
+              <div
+                key={formula.name}
+                className={`aos aos-delay-${(i % 3) + 1} bg-nuclora-ivory p-10 group`}
               >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PRODUCTS GRID */}
-      <section className="section-pad bg-white">
-        <div className="container-tight">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allProducts.map((product) => (
-              <Link
-                key={product.slug}
-                href={`/products/${product.slug}`}
-                className="product-card group block border border-nuclora-border hover:border-nuclora-teal transition-all duration-300"
-              >
-                {/* Product visual */}
-                <div className="relative h-64 bg-nuclora-cream overflow-hidden">
-                  <div
-                    className={`product-img w-full h-full flex flex-col items-center justify-center gap-3 ${
-                      product.color === "teal"
-                        ? "bg-gradient-to-br from-nuclora-cream to-teal-50"
-                        : product.color === "gold"
-                        ? "bg-gradient-to-br from-nuclora-cream to-amber-50"
-                        : "bg-gradient-to-br from-nuclora-cream to-slate-100"
-                    }`}
+                <div className="flex items-start gap-4">
+                  <span
+                    className="text-4xl font-light text-nuclora-gold/30 leading-none mt-1"
+                    style={{ fontFamily: "var(--font-cormorant)" }}
                   >
-                    <div
-                      className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                        product.color === "teal"
-                          ? "bg-nuclora-teal/20"
-                          : product.color === "gold"
-                          ? "bg-nuclora-gold/20"
-                          : "bg-nuclora-navy/10"
-                      }`}
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3
+                      className="text-xl font-light text-nuclora-navy mb-2"
+                      style={{ fontFamily: "var(--font-cormorant)" }}
                     >
-                      <div
-                        className={`w-10 h-10 rounded-full ${
-                          product.color === "teal"
-                            ? "bg-nuclora-teal/40"
-                            : product.color === "gold"
-                            ? "bg-nuclora-gold/40"
-                            : "bg-nuclora-navy/20"
-                        }`}
-                      />
-                    </div>
-                  </div>
-                  {/* Badges */}
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="px-3 py-1 bg-white text-nuclora-navy text-xs font-medium tracking-wider">
-                      {product.category}
-                    </span>
-                    {product.badge && (
-                      <span className="px-3 py-1 bg-nuclora-navy text-white text-xs font-medium tracking-wider">
-                        {product.badge}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Product info */}
-                <div className="p-6">
-                  <p className="text-xs font-light tracking-wide text-nuclora-teal mb-1">
-                    {product.highlight}
-                  </p>
-                  <h3
-                    className="text-xl font-light text-nuclora-navy mb-2 group-hover:text-nuclora-teal transition-colors"
-                    style={{ fontFamily: "var(--font-cormorant)" }}
-                  >
-                    {product.name}
-                  </h3>
-                  <p className="text-sm font-light text-nuclora-muted mb-5 line-clamp-2">
-                    {product.description}
-                  </p>
-                  <div className="flex items-center justify-between pt-4 border-t border-nuclora-border">
-                    <div>
-                      <span
-                        className="text-2xl font-light text-nuclora-navy"
-                        style={{ fontFamily: "var(--font-cormorant)" }}
-                      >
-                        {product.price}
-                      </span>
-                      <span className="text-xs font-light text-nuclora-muted ml-2">
-                        / month
-                      </span>
-                    </div>
-                    <span className="text-xs font-medium tracking-widest uppercase text-nuclora-teal group-hover:text-nuclora-navy transition-colors">
-                      View →
+                      {formula.name}
+                    </h3>
+                    <p className="text-xs font-medium tracking-widest uppercase text-nuclora-muted">
+                      {formula.tagline}
+                    </p>
+                    <span className="inline-flex items-center gap-2 mt-4 px-3 py-1 bg-nuclora-gold/10 rounded-full text-xs font-medium tracking-widest uppercase text-nuclora-gold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-nuclora-gold animate-pulse" />
+                      Coming Soon
                     </span>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* STACK GUIDE */}
-      <section className="py-24 bg-nuclora-cream">
-        <div className="container-tight">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="label-sm mb-6">Build Your Stack</p>
-              <h2 className="heading-xl mb-6">
-                Not sure where to start?
-              </h2>
-              <p className="body-lg mb-6">
-                Our products are designed to work independently and in
-                combination. Common protocol foundations include our NAD+
-                Complex + Omega-3 Ultra as a longevity baseline, with the
-                Mitochondrial Activator for performance demands.
-              </p>
-              <p className="body-lg mb-8">
-                Have questions about which products fit your goals? Our team
-                includes registered nutritionists available to guide you.
-              </p>
-              <Link href="/contact" className="btn-teal">
-                Talk to a Nutritionist
-              </Link>
-            </div>
-            <div className="space-y-4">
-              {[
-                {
-                  stack: "Longevity Foundation",
-                  products: "NAD+ Complex + Omega-3 Ultra + D3/K2",
-                  goal: "Cellular health, anti-aging, and immune support",
-                },
-                {
-                  stack: "Performance Protocol",
-                  products: "Mitochondrial Activator + Omega-3 Ultra",
-                  goal: "Energy, endurance, and recovery optimization",
-                },
-                {
-                  stack: "Cognitive Stack",
-                  products: "Cognitive Clarity + Sleep & Recovery",
-                  goal: "Focus, memory, and sleep quality",
-                },
-              ].map((s) => (
-                <div key={s.stack} className="bg-white p-6 border border-nuclora-border">
-                  <p
-                    className="text-xl font-light text-nuclora-navy mb-1"
-                    style={{ fontFamily: "var(--font-cormorant)" }}
-                  >
-                    {s.stack}
-                  </p>
-                  <p className="text-xs font-medium tracking-wide text-nuclora-teal mb-2">
-                    {s.products}
-                  </p>
-                  <p className="text-sm font-light text-nuclora-muted">{s.goal}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* ── BOTTOM CTA ── */}
+      <section className="bg-nuclora-navy py-24">
+        <div className="max-w-2xl mx-auto px-6 text-center">
+          <p className="label-gold mb-5 aos">Be First</p>
+          <h2
+            className="text-5xl font-light text-white leading-tight mb-6 aos aos-delay-1"
+            style={{ fontFamily: "var(--font-cormorant)" }}
+          >
+            The future of health
+            <br />
+            <span className="italic">begins at the cellular level.</span>
+          </h2>
+          <p className="text-base font-light text-white/50 mb-10 aos aos-delay-2">
+            Join the Nuclora early access list. Be the first to know when we launch
+            and receive an exclusive founding member discount.
+          </p>
+          <form
+            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto aos aos-delay-3"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 px-6 py-4 bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm font-light rounded-full focus:outline-none focus:border-nuclora-gold transition-colors"
+            />
+            <button type="submit" className="btn-gold whitespace-nowrap">
+              Get Early Access
+            </button>
+          </form>
         </div>
       </section>
-    </>
+    </main>
   );
 }
