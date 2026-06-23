@@ -342,81 +342,107 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── PRODUCTS ───────────────────────────────────────────── */}
-      <section className="bg-nuclora-ivory section-pad">
+      {/* ── COMING SOON ────────────────────────────────────────── */}
+      <section className="bg-nuclora-ivory section-pad overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 aos">
-            <div>
-              <p className="label-gold mb-3">The Collection</p>
-              <h2
-                className="heading-display"
-                style={{ fontFamily: "var(--font-cormorant)" }}
-              >
-                The Core Collection
-              </h2>
-            </div>
-            <Link href="/products" className="btn-outline self-start md:self-auto">
-              View All Products
-            </Link>
+
+          {/* Top label */}
+          <div className="text-center mb-20 aos">
+            <p className="label-gold mb-4">The Collection</p>
+            <h2
+              className="heading-display max-w-3xl mx-auto"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              Something extraordinary
+              <br />
+              <span className="italic">is coming.</span>
+            </h2>
           </div>
 
-          {/* Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product, i) => (
-              <Link
-                key={product.id}
-                href={`/products/${product.id}`}
-                className={`aos aos-delay-${(i % 3) + 1} group`}
-              >
-                <div className="product-card-hover rounded-2xl overflow-hidden border border-nuclora-border bg-white">
-                  {/* Image area */}
-                  <div
-                    className="relative h-64 flex items-center justify-center overflow-hidden"
-                    style={{ backgroundColor: product.accent }}
-                  >
-                    <div className="relative w-36 h-52">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
-                        unoptimized={product.image.endsWith(".svg")}
-                      />
-                    </div>
-                    {/* Tag */}
-                    <span className="absolute top-4 left-4 px-3 py-1 bg-white/80 backdrop-blur-sm text-nuclora-navy text-xs font-medium tracking-wider uppercase rounded-full">
-                      {product.tag}
-                    </span>
-                  </div>
+          {/* Central bottle + radiating layout */}
+          <div className="relative flex items-center justify-center mb-20">
+            {/* Outer decorative rings */}
+            <div className="absolute w-[520px] h-[520px] rounded-full border border-nuclora-gold/10" />
+            <div className="absolute w-[380px] h-[380px] rounded-full border border-nuclora-gold/15" />
+            <div className="absolute w-[250px] h-[250px] rounded-full border border-nuclora-gold/20" />
 
-                  {/* Content */}
-                  <div className="p-7">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3
-                        className="text-xl font-light text-nuclora-navy leading-snug"
-                        style={{ fontFamily: "var(--font-cormorant)" }}
-                      >
-                        {product.name}
-                      </h3>
-                      <span className="text-nuclora-gold font-medium text-sm ml-4 whitespace-nowrap">
-                        {product.price}
-                      </span>
-                    </div>
-                    <p className="text-sm font-light text-nuclora-muted leading-relaxed mb-5">
-                      {product.description}
-                    </p>
-                    <span className="inline-flex items-center text-xs font-medium tracking-widest uppercase text-nuclora-navy group-hover:text-nuclora-gold transition-colors duration-300">
-                      Learn More
-                      <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">
-                        →
-                      </span>
-                    </span>
-                  </div>
+            {/* Floating product name pills — orbiting */}
+            {[
+              { label: "Cellular NAD+ Complex", angle: -60, r: 240 },
+              { label: "Omega-3 Ultra", angle: 0, r: 240 },
+              { label: "Mitochondrial Activator", angle: 60, r: 240 },
+              { label: "Sleep & Recovery", angle: 120, r: 240 },
+              { label: "Cognitive Clarity", angle: 180, r: 240 },
+              { label: "Vitamin D3 + K2", angle: 240, r: 240 },
+            ].map((item, i) => {
+              const rad = (item.angle * Math.PI) / 180;
+              const x = Math.cos(rad) * item.r;
+              const y = Math.sin(rad) * item.r;
+              return (
+                <div
+                  key={item.label}
+                  className={`absolute hidden lg:flex aos aos-delay-${i + 1}`}
+                  style={{ transform: `translate(${x}px, ${y}px)` }}
+                >
+                  <span className="px-4 py-2 bg-white border border-nuclora-border rounded-full text-xs font-medium tracking-wider text-nuclora-navy whitespace-nowrap shadow-sm">
+                    {item.label}
+                  </span>
                 </div>
-              </Link>
-            ))}
+              );
+            })}
+
+            {/* Central bottle */}
+            <div className="relative z-10 aos aos-delay-2">
+              <div
+                className="w-64 h-80 rounded-3xl flex items-center justify-center relative overflow-hidden"
+                style={{ backgroundColor: "#EDE8DF" }}
+              >
+                <div className="relative w-44 h-64">
+                  <Image
+                    src="/nmn-bottle.png"
+                    alt="Nuclora — Coming Soon"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority
+                  />
+                </div>
+              </div>
+              {/* Redacted badge */}
+              <div className="absolute -top-3 -right-3 w-16 h-16 bg-nuclora-navy rounded-full flex items-center justify-center shadow-lg">
+                <span
+                  className="text-nuclora-gold text-xs font-medium text-center leading-tight"
+                  style={{ fontFamily: "var(--font-cormorant)", fontSize: "11px" }}
+                >
+                  6<br/>Formulas
+                </span>
+              </div>
+            </div>
           </div>
+
+          {/* Bottom copy + email */}
+          <div className="max-w-xl mx-auto text-center aos">
+            <p className="body-base mb-8">
+              Six science-driven formulas. Clinically informed. Uncompromisingly pure.
+              Be the first to know when Nuclora launches.
+            </p>
+            <form
+              className="flex flex-col sm:flex-row gap-3"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="email"
+                placeholder="Enter your email for early access"
+                className="flex-1 px-6 py-4 bg-white border border-nuclora-border text-nuclora-navy placeholder-nuclora-muted text-sm font-light rounded-full focus:outline-none focus:border-nuclora-gold transition-colors"
+              />
+              <button type="submit" className="btn-gold whitespace-nowrap">
+                Notify Me
+              </button>
+            </form>
+            <p className="text-xs text-nuclora-muted mt-4">
+              Early access members receive an exclusive launch discount.
+            </p>
+          </div>
+
         </div>
       </section>
 
