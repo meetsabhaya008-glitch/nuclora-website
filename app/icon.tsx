@@ -4,7 +4,9 @@ export const runtime = "edge";
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
-export default function Icon() {
+// Primary favicon is /public/favicon.svg served via layout.tsx <link> tag.
+// This is a fallback for environments that don't support SVG favicons.
+export default async function Icon() {
   return new ImageResponse(
     (
       <div
@@ -19,14 +21,7 @@ export default function Icon() {
           border: "2px solid #B8906A",
         }}
       >
-        <div
-          style={{
-            color: "#B8906A",
-            fontSize: 44,
-            lineHeight: 1,
-            marginTop: 4,
-          }}
-        >
+        <div style={{ color: "#B8906A", fontSize: 44, lineHeight: 1, marginTop: 4 }}>
           N
         </div>
       </div>
