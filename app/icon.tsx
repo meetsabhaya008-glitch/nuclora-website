@@ -12,23 +12,14 @@ export default async function Icon() {
 
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: 64,
-          height: 64,
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "flex-start",
-          overflow: "hidden",
-        }}
-      >
+      <div style={{ width: 64, height: 64, display: "flex" }}>
         <img
           src={base64}
           style={{
-            width: 500,
-            height: 500,
-            objectFit: "contain",
-            flexShrink: 0,
+            width: 64,
+            height: 64,
+            objectFit: "cover",
+            objectPosition: "left center",
           }}
         />
       </div>
