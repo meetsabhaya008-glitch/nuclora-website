@@ -37,7 +37,7 @@ export default function Navbar() {
             alt="Nuclora"
             width={220}
             height={75}
-            className="h-16 w-auto object-contain"
+            className="h-16 w-auto object-contain mt-3"
             style={{ mixBlendMode: "multiply" }}
             priority
           />
