@@ -29,15 +29,15 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-24">
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0">
           <Image
             src="/nuclora logo.png"
             alt="Nuclora"
-            width={140}
-            height={50}
-            className="h-10 w-auto object-contain"
+            width={200}
+            height={70}
+            className="h-14 w-auto object-contain"
             priority
           />
         </Link>

@@ -13,7 +13,8 @@ const products = [
     description:
       "Pharmaceutical-grade NMN + NR complex to replenish NAD+ levels, support mitochondrial function, and promote healthy cellular aging.",
     tag: "Best Seller",
-    accent: "#E8E2D9",
+    accent: "#EDE8DF",
+    image: "/nmn-bottle.png",
   },
   {
     id: "omega-3-ultra",
@@ -23,7 +24,8 @@ const products = [
     description:
       "Ultra-pure triglyceride-form fish oil with 3000mg EPA+DHA per serving. Molecularly distilled, free of heavy metals and oxidation products.",
     tag: "Pure Formula",
-    accent: "#DCE4E0",
+    accent: "#E0E8E5",
+    image: "/omega-3-ultra.svg",
   },
   {
     id: "mitochondrial-activator",
@@ -33,7 +35,8 @@ const products = [
     description:
       "CoQ10, PQQ, L-Carnitine, and Alpha Lipoic Acid synergistically formulated to optimise mitochondrial biogenesis and cellular energy output.",
     tag: "Advanced",
-    accent: "#E4DDD6",
+    accent: "#EDE5DC",
+    image: "/mitochondrial-activator.svg",
   },
   {
     id: "sleep-recovery-complex",
@@ -43,7 +46,8 @@ const products = [
     description:
       "Magnesium glycinate, L-Theanine, Ashwagandha, and pharmaceutical-grade Melatonin to restore sleep architecture and accelerate cellular recovery.",
     tag: "Recovery",
-    accent: "#D8DCE4",
+    accent: "#DDE0EA",
+    image: "/sleep-recovery-complex.svg",
   },
   {
     id: "cognitive-clarity",
@@ -53,7 +57,8 @@ const products = [
     description:
       "Lion's Mane, Bacopa Monnieri, and Phosphatidylserine — clinically studied nootropics for neuroplasticity, recall, and sustained focus.",
     tag: "Cognitive",
-    accent: "#E2E0DA",
+    accent: "#E2E4E8",
+    image: "/cognitive-clarity.svg",
   },
   {
     id: "vitamin-d3-k2",
@@ -63,7 +68,8 @@ const products = [
     description:
       "5000 IU D3 paired with 200mcg MK-7 K2 for optimal calcium metabolism, immune regulation, and cardiovascular protection.",
     tag: "Foundation",
-    accent: "#E6E0D8",
+    accent: "#EDE8DF",
+    image: "/vitamin-d3-k2.svg",
   },
 ];
 
@@ -369,27 +375,15 @@ export default function HomePage() {
                     className="relative h-64 flex items-center justify-center overflow-hidden"
                     style={{ backgroundColor: product.accent }}
                   >
-                    {i === 0 ? (
-                      <div className="relative w-36 h-52">
-                        <Image
-                          src="/nmn-bottle.png"
-                          alt={product.name}
-                          fill
-                          className="object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                    ) : (
-                      <div className="text-center p-6" style={{ fontFamily: "var(--font-cormorant)" }}>
-                        <div className="w-24 h-32 mx-auto rounded-2xl border border-nuclora-navy/10 flex flex-col items-center justify-center gap-2 bg-white/40">
-                          <div className="text-4xl font-light text-nuclora-navy/25">
-                            {product.name.charAt(0)}
-                          </div>
-                          <div className="text-xs font-light text-nuclora-navy/30 tracking-wide px-2 text-center leading-tight">
-                            {product.tagline}
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                    <div className="relative w-36 h-52">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+                        unoptimized={product.image.endsWith(".svg")}
+                      />
+                    </div>
                     {/* Tag */}
                     <span className="absolute top-4 left-4 px-3 py-1 bg-white/80 backdrop-blur-sm text-nuclora-navy text-xs font-medium tracking-wider uppercase rounded-full">
                       {product.tag}
