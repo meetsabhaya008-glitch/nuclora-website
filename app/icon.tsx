@@ -1,37 +1,37 @@
 import { ImageResponse } from "next/og";
-import { readFileSync } from "fs";
-import { join } from "path";
 
-export const runtime = "nodejs";
-export const size = { width: 64, height: 64 };
+export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-export default async function Icon() {
-  const logoBuffer = readFileSync(join(process.cwd(), "public/newonlylogo.png"));
-  const base64 = `data:image/png;base64,${logoBuffer.toString("base64")}`;
-
+export default function Icon() {
   return new ImageResponse(
     (
       <div
         style={{
-          width: "100%",
-          height: "100%",
+          width: 32,
+          height: 32,
+          background: "#131929",
+          borderRadius: 7,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          overflow: "hidden",
+          border: "1.5px solid #B8906A",
         }}
       >
-        <img
-          src={base64}
+        <div
           style={{
-            width: "320%",
-            height: "320%",
-            objectFit: "contain",
+            color: "#B8906A",
+            fontSize: 21,
+            fontFamily: "Georgia, serif",
+            fontWeight: 400,
+            lineHeight: 1,
+            marginTop: 1,
           }}
-        />
+        >
+          N
+        </div>
       </div>
     ),
-    { ...size }
+    { width: 32, height: 32 }
   );
 }
