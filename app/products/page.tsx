@@ -25,15 +25,15 @@ export default function ProductsPage() {
   return (
     <main>
       {/* ── HERO ── */}
-      <section className="min-h-screen bg-nuclora-navy flex items-center pt-24">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full py-24">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+      <section className="min-h-screen bg-nuclora-navy flex items-center pt-20">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full py-16 md:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
             {/* Left */}
-            <div>
+            <div className="text-center lg:text-left">
               <p className="label-gold mb-6 aos">The Collection</p>
               <h1
-                className="text-6xl md:text-7xl lg:text-8xl font-light leading-none text-white mb-8 aos aos-delay-1"
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-none text-white mb-8 aos aos-delay-1"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 Coming
@@ -65,14 +65,14 @@ export default function ProductsPage() {
             </div>
 
             {/* Right — bottle */}
-            <div className="relative flex items-center justify-center aos aos-delay-2">
-              <div className="absolute w-80 h-80 rounded-full border border-nuclora-gold/10" />
-              <div className="absolute w-56 h-56 rounded-full border border-nuclora-gold/15" />
+            <div className="relative flex items-center justify-center aos aos-delay-2 mt-8 lg:mt-0">
+              <div className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full border border-nuclora-gold/10" />
+              <div className="absolute w-44 h-44 md:w-56 md:h-56 rounded-full border border-nuclora-gold/15" />
               <div
-                className="relative w-72 h-[420px] rounded-3xl flex items-center justify-center"
+                className="relative w-60 md:w-72 h-[320px] md:h-[420px] rounded-3xl flex items-center justify-center"
                 style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
               >
-                <div className="relative w-52 h-[360px]">
+                <div className="relative w-44 md:w-52 h-[280px] md:h-[360px]">
                   <Image
                     src="/nmn-bottle.png"
                     alt="Nuclora — Coming Soon"
@@ -100,7 +100,7 @@ export default function ProductsPage() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-nuclora-border">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-nuclora-border">
             {formulas.map((formula, i) => (
               <div
                 key={formula.name}

@@ -29,16 +29,19 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-24">
-        {/* Logo */}
-        <Link href="/" className="flex items-center flex-shrink-0">
+      <div className="max-w-7xl mx-auto px-4 md:px-12 flex items-center justify-between h-20">
+        {/* Logo — removed mt offset, using self-center for true vertical centering */}
+        <Link href="/" className="flex-shrink-0 flex items-center self-center">
           <Image
             src="/nuclora logo.png"
             alt="Nuclora"
-            width={220}
-            height={75}
-            className="h-16 w-auto object-contain mt-3"
-            style={{ mixBlendMode: "multiply" }}
+            width={180}
+            height={60}
+            className="w-auto object-contain"
+            style={{
+              mixBlendMode: "multiply",
+              height: "52px",
+            }}
             priority
           />
         </Link>
@@ -56,7 +59,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA — pill button */}
+        {/* CTA */}
         <div className="hidden md:flex items-center">
           <Link href="/products" className="btn-primary">
             Pre-Order Now
@@ -69,21 +72,9 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <span
-            className={`block w-6 h-0.5 bg-nuclora-navy transition-all duration-300 ${
-              menuOpen ? "rotate-45 translate-y-2" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-nuclora-navy transition-all duration-300 ${
-              menuOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-nuclora-navy transition-all duration-300 ${
-              menuOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          />
+          <span className={`block w-6 h-0.5 bg-nuclora-navy transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+          <span className={`block w-6 h-0.5 bg-nuclora-navy transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block w-6 h-0.5 bg-nuclora-navy transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
       </div>
 

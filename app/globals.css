@@ -27,6 +27,7 @@ body {
   font-family: var(--font-inter);
   font-weight: 400;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -54,11 +55,11 @@ body {
   }
   .heading-hero {
     font-family: var(--font-cormorant);
-    @apply text-6xl md:text-7xl lg:text-8xl font-light leading-none text-nuclora-navy;
+    @apply text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-none text-nuclora-navy;
   }
   .heading-display {
     font-family: var(--font-cormorant);
-    @apply text-5xl md:text-6xl lg:text-7xl font-light leading-tight text-nuclora-navy;
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-tight text-nuclora-navy;
   }
   .heading-xl {
     font-family: var(--font-cormorant);

@@ -199,28 +199,29 @@ export default function HomePage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="min-h-screen bg-nuclora-ivory flex flex-col justify-center pt-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center py-16 md:py-20">
+
             {/* Left — text */}
-            <div>
-              <p className="label-gold mb-6">Cellular Longevity Science</p>
+            <div className="text-center lg:text-left">
+              <p className="label-gold mb-5">Cellular Longevity Science</p>
               <h1
-                className="heading-hero mb-8"
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-none text-nuclora-navy mb-7"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 Precision
                 <br />
                 Nutrition.
                 <br />
-                <span className="italic font-light">Clinically</span>
+                <span className="italic">Clinically</span>
                 <br />
                 Informed.
               </h1>
-              <p className="body-lg max-w-md mb-10">
+              <p className="text-base md:text-lg font-light leading-relaxed text-nuclora-muted max-w-md mb-8 mx-auto lg:mx-0">
                 Advanced cellular nutrition formulated from peer-reviewed science.
-                No shortcuts. No compromises. Just science-backed formulas for those
-                who invest in their health for the long term.
+                No shortcuts. No compromises. Just science-backed formulas for
+                those who invest in their health for the long term.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Link href="/products" className="btn-gold">
                   Explore the Collection
                 </Link>
@@ -230,19 +231,17 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right — product bottle */}
-            <div className="relative hidden lg:flex items-center justify-center">
-              {/* Soft background glow */}
+            {/* Right — product bottle (desktop + mobile) */}
+            <div className="relative flex items-center justify-center mt-8 lg:mt-0">
               <div
-                className="w-[480px] h-[560px] rounded-3xl relative flex items-center justify-center overflow-hidden"
+                className="w-full max-w-sm lg:w-[440px] lg:max-w-none h-[380px] md:h-[480px] rounded-3xl relative flex items-center justify-center overflow-hidden"
                 style={{ backgroundColor: "#EDE8DF" }}
               >
-                {/* Subtle ring behind bottle */}
-                <div className="absolute w-80 h-80 rounded-full border border-nuclora-gold/15" />
-                <div className="absolute w-56 h-56 rounded-full border border-nuclora-gold/10" />
+                <div className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full border border-nuclora-gold/15" />
+                <div className="absolute w-44 h-44 md:w-56 md:h-56 rounded-full border border-nuclora-gold/10" />
 
                 {/* Bottle image */}
-                <div className="relative z-10 w-72 h-[420px]">
+                <div className="relative z-10 w-52 md:w-64 h-[300px] md:h-[380px]">
                   <Image
                     src="/nmn-bottle.png"
                     alt="Nuclora NMN 500mg — Cellular Longevity"
@@ -251,34 +250,27 @@ export default function HomePage() {
                     priority
                   />
                 </div>
-              </div>
 
-              {/* Floating badge */}
-              <div className="absolute bottom-10 -left-4 bg-white px-5 py-4 rounded-2xl shadow-xl border border-nuclora-border">
-                <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-1">
-                  Flagship Formula
-                </p>
-                <p
-                  className="text-lg font-light text-nuclora-navy"
-                  style={{ fontFamily: "var(--font-cormorant)" }}
-                >
-                  NMN 500mg
-                </p>
-              </div>
-
-              {/* Second badge */}
-              <div className="absolute top-10 -right-2 bg-nuclora-navy px-4 py-3 rounded-xl shadow-lg">
-                <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">
-                  Made with precision
-                </p>
-                <p
-                  className="text-sm font-light text-white"
-                  style={{ fontFamily: "var(--font-cormorant)" }}
-                >
-                  in Australia
-                </p>
+                {/* Badges inside the card — no overflow issues */}
+                <div className="absolute bottom-4 left-4 bg-white px-4 py-3 rounded-xl shadow-lg border border-nuclora-border">
+                  <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">
+                    Flagship Formula
+                  </p>
+                  <p className="text-base font-light text-nuclora-navy" style={{ fontFamily: "var(--font-cormorant)" }}>
+                    NMN 500mg
+                  </p>
+                </div>
+                <div className="absolute top-4 right-4 bg-nuclora-navy px-3 py-2.5 rounded-xl shadow-lg">
+                  <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">
+                    Made with precision
+                  </p>
+                  <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>
+                    in Australia
+                  </p>
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -311,7 +303,7 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
             {standards.map((s, i) => (
               <div
                 key={s.num}
@@ -361,10 +353,10 @@ export default function HomePage() {
 
           {/* Central bottle + radiating layout */}
           <div className="relative flex items-center justify-center mb-20">
-            {/* Outer decorative rings */}
-            <div className="absolute w-[520px] h-[520px] rounded-full border border-nuclora-gold/10" />
-            <div className="absolute w-[380px] h-[380px] rounded-full border border-nuclora-gold/15" />
-            <div className="absolute w-[250px] h-[250px] rounded-full border border-nuclora-gold/20" />
+            {/* Outer decorative rings — hidden on mobile to avoid overflow */}
+            <div className="absolute hidden sm:block w-[400px] md:w-[520px] h-[400px] md:h-[520px] rounded-full border border-nuclora-gold/10" />
+            <div className="absolute hidden sm:block w-[280px] md:w-[380px] h-[280px] md:h-[380px] rounded-full border border-nuclora-gold/15" />
+            <div className="absolute w-[200px] md:w-[250px] h-[200px] md:h-[250px] rounded-full border border-nuclora-gold/20" />
 
             {/* Floating product name pills — orbiting */}
             {[
@@ -417,6 +409,15 @@ export default function HomePage() {
                 </span>
               </div>
             </div>
+          </div>
+
+          {/* Mobile product list — visible only below lg where orbiting pills are hidden */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10 lg:hidden aos">
+            {["Cellular NAD+ Complex", "Omega-3 Ultra", "Mitochondrial Activator", "Sleep & Recovery", "Cognitive Clarity", "Vitamin D3 + K2"].map((name) => (
+              <span key={name} className="px-4 py-2 bg-white border border-nuclora-border rounded-full text-xs font-medium tracking-wider text-nuclora-navy shadow-sm">
+                {name}
+              </span>
+            ))}
           </div>
 
           {/* Bottom copy + email */}

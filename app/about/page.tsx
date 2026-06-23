@@ -20,11 +20,11 @@ export default function AboutPage() {
   return (
     <main>
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="bg-nuclora-ivory min-h-[70vh] flex items-end pt-32 pb-20">
+      <section className="bg-nuclora-ivory min-h-[60vh] flex items-end pt-28 pb-16 md:pt-32 md:pb-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
           <p className="label-gold mb-6 aos">About Nuclora</p>
           <h1
-            className="text-6xl md:text-7xl lg:text-8xl font-light leading-none text-nuclora-navy max-w-5xl aos aos-delay-1"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light leading-tight text-nuclora-navy max-w-5xl aos aos-delay-1"
             style={{ fontFamily: "var(--font-cormorant)" }}
           >
             Redefining the future of health through{" "}
