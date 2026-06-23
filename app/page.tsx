@@ -226,14 +226,12 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Bottle — full width card on mobile */}
+            {/* Bottle card — clean, no overlapping badges */}
             <div
-              className="rounded-3xl relative flex items-center justify-center overflow-hidden mx-auto"
-              style={{ backgroundColor: "#EDE8DF", height: "340px" }}
+              className="rounded-3xl flex items-center justify-center mx-auto overflow-hidden"
+              style={{ backgroundColor: "#EDE8DF", height: "320px", width: "100%" }}
             >
-              <div className="absolute w-52 h-52 rounded-full border border-nuclora-gold/15" />
-              <div className="absolute w-36 h-36 rounded-full border border-nuclora-gold/10" />
-              <div className="relative z-10 w-44 h-64">
+              <div className="relative w-44 h-60">
                 <Image
                   src="/nmn-bottle.png"
                   alt="Nuclora NMN 500mg"
@@ -242,23 +240,17 @@ export default function HomePage() {
                   priority
                 />
               </div>
-              {/* Badge — bottom left, short text */}
-              <div className="absolute bottom-4 left-4 bg-white px-3 py-2.5 rounded-xl shadow-lg border border-nuclora-border">
-                <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold mb-0.5">
-                  Flagship
-                </p>
-                <p className="text-base font-light text-nuclora-navy" style={{ fontFamily: "var(--font-cormorant)" }}>
-                  NMN 500mg
-                </p>
+            </div>
+
+            {/* Info strip below the bottle card */}
+            <div className="flex items-center justify-between mt-3 px-1">
+              <div>
+                <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold">Flagship Formula</p>
+                <p className="text-lg font-light text-nuclora-navy" style={{ fontFamily: "var(--font-cormorant)" }}>NMN 500mg</p>
               </div>
-              {/* Badge — top right */}
-              <div className="absolute top-4 right-4 bg-nuclora-navy px-3 py-2 rounded-xl shadow-lg">
-                <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold mb-0.5">
-                  Made in
-                </p>
-                <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>
-                  Australia
-                </p>
+              <div className="bg-nuclora-navy rounded-xl px-4 py-2.5 text-right">
+                <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold">Made in</p>
+                <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>India</p>
               </div>
             </div>
           </div>
@@ -311,8 +303,8 @@ export default function HomePage() {
                   <p className="text-lg font-light text-nuclora-navy" style={{ fontFamily: "var(--font-cormorant)" }}>NMN 500mg</p>
                 </div>
                 <div className="absolute top-6 right-6 bg-nuclora-navy px-4 py-3 rounded-xl shadow-lg">
-                  <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">Made with precision</p>
-                  <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>in Australia</p>
+                  <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">Made in</p>
+                  <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>India</p>
                 </div>
               </div>
             </div>

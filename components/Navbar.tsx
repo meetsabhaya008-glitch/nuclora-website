@@ -30,20 +30,19 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-12 flex items-center justify-between h-20">
-        {/* Logo — removed mt offset, using self-center for true vertical centering */}
+        {/* Logo */}
         <Link href="/" className="flex-shrink-0 flex items-center self-center">
-          <Image
-            src="/nuclora logo.png"
-            alt="Nuclora"
-            width={180}
-            height={60}
-            className="w-auto object-contain"
-            style={{
-              mixBlendMode: "multiply",
-              height: "52px",
-            }}
-            priority
-          />
+          <div className="rounded-lg overflow-hidden bg-white/90">
+            <Image
+              src="/nuclora logo.png"
+              alt="Nuclora"
+              width={160}
+              height={54}
+              className="w-auto object-contain"
+              style={{ height: "54px", display: "block" }}
+              priority
+            />
+          </div>
         </Link>
 
         {/* Desktop Nav */}

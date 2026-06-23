@@ -147,7 +147,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Nuclora. All rights reserved.
           </p>
           <p className="text-xs font-light text-white/30 tracking-wider">
-            Made with precision in Australia
+            Made with precision in India
           </p>
         </div>
       </div>

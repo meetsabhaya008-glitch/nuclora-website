@@ -74,8 +74,6 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/newonlylogo.png" type="image/png" />
-        <link rel="shortcut icon" href="/newonlylogo.png" type="image/png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="apple-touch-icon" sizes="180x180" href="/newonlylogo.png" />
