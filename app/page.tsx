@@ -197,15 +197,78 @@ export default function HomePage() {
   return (
     <main>
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="min-h-screen bg-nuclora-ivory flex flex-col justify-center pt-20">
+      <section className="bg-nuclora-ivory pt-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center py-16 md:py-20">
 
-            {/* Left — text */}
-            <div className="text-center lg:text-left">
+          {/* Mobile hero — stacked, compact */}
+          <div className="lg:hidden py-10">
+            <div className="text-center mb-8">
+              <p className="label-gold mb-4">Cellular Longevity Science</p>
+              <h1
+                className="text-4xl sm:text-5xl font-light leading-tight text-nuclora-navy mb-5"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                Precision Nutrition.
+                <br />
+                <span className="italic">Clinically Informed.</span>
+              </h1>
+              <p className="text-sm font-light leading-relaxed text-nuclora-muted max-w-sm mx-auto mb-7">
+                Advanced cellular nutrition formulated from peer-reviewed science.
+                No shortcuts. No compromises.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link href="/products" className="btn-gold">
+                  Explore the Collection
+                </Link>
+                <Link href="/science" className="btn-outline">
+                  The Science
+                </Link>
+              </div>
+            </div>
+
+            {/* Bottle — full width card on mobile */}
+            <div
+              className="rounded-3xl relative flex items-center justify-center overflow-hidden mx-auto"
+              style={{ backgroundColor: "#EDE8DF", height: "340px" }}
+            >
+              <div className="absolute w-52 h-52 rounded-full border border-nuclora-gold/15" />
+              <div className="absolute w-36 h-36 rounded-full border border-nuclora-gold/10" />
+              <div className="relative z-10 w-44 h-64">
+                <Image
+                  src="/nmn-bottle.png"
+                  alt="Nuclora NMN 500mg"
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                  priority
+                />
+              </div>
+              {/* Badge — bottom left, short text */}
+              <div className="absolute bottom-4 left-4 bg-white px-3 py-2.5 rounded-xl shadow-lg border border-nuclora-border">
+                <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold mb-0.5">
+                  Flagship
+                </p>
+                <p className="text-base font-light text-nuclora-navy" style={{ fontFamily: "var(--font-cormorant)" }}>
+                  NMN 500mg
+                </p>
+              </div>
+              {/* Badge — top right */}
+              <div className="absolute top-4 right-4 bg-nuclora-navy px-3 py-2 rounded-xl shadow-lg">
+                <p className="text-xs font-medium tracking-wider uppercase text-nuclora-gold mb-0.5">
+                  Made in
+                </p>
+                <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>
+                  Australia
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop hero — two-column */}
+          <div className="hidden lg:grid grid-cols-2 gap-12 items-center py-20 min-h-[90vh]">
+            <div>
               <p className="label-gold mb-5">Cellular Longevity Science</p>
               <h1
-                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-none text-nuclora-navy mb-7"
+                className="text-7xl xl:text-8xl font-light leading-none text-nuclora-navy mb-7"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 Precision
@@ -216,32 +279,25 @@ export default function HomePage() {
                 <br />
                 Informed.
               </h1>
-              <p className="text-base md:text-lg font-light leading-relaxed text-nuclora-muted max-w-md mb-8 mx-auto lg:mx-0">
+              <p className="text-lg font-light leading-relaxed text-nuclora-muted max-w-md mb-8">
                 Advanced cellular nutrition formulated from peer-reviewed science.
                 No shortcuts. No compromises. Just science-backed formulas for
                 those who invest in their health for the long term.
               </p>
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Link href="/products" className="btn-gold">
-                  Explore the Collection
-                </Link>
-                <Link href="/science" className="btn-outline">
-                  The Science
-                </Link>
+              <div className="flex gap-4">
+                <Link href="/products" className="btn-gold">Explore the Collection</Link>
+                <Link href="/science" className="btn-outline">The Science</Link>
               </div>
             </div>
 
-            {/* Right — product bottle (desktop + mobile) */}
-            <div className="relative flex items-center justify-center mt-8 lg:mt-0">
+            <div className="relative flex items-center justify-center">
               <div
-                className="w-full max-w-sm lg:w-[440px] lg:max-w-none h-[380px] md:h-[480px] rounded-3xl relative flex items-center justify-center overflow-hidden"
+                className="w-[440px] h-[520px] rounded-3xl relative flex items-center justify-center overflow-hidden"
                 style={{ backgroundColor: "#EDE8DF" }}
               >
-                <div className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full border border-nuclora-gold/15" />
-                <div className="absolute w-44 h-44 md:w-56 md:h-56 rounded-full border border-nuclora-gold/10" />
-
-                {/* Bottle image */}
-                <div className="relative z-10 w-52 md:w-64 h-[300px] md:h-[380px]">
+                <div className="absolute w-80 h-80 rounded-full border border-nuclora-gold/15" />
+                <div className="absolute w-56 h-56 rounded-full border border-nuclora-gold/10" />
+                <div className="relative z-10 w-64 h-[400px]">
                   <Image
                     src="/nmn-bottle.png"
                     alt="Nuclora NMN 500mg — Cellular Longevity"
@@ -250,28 +306,18 @@ export default function HomePage() {
                     priority
                   />
                 </div>
-
-                {/* Badges inside the card — no overflow issues */}
-                <div className="absolute bottom-4 left-4 bg-white px-4 py-3 rounded-xl shadow-lg border border-nuclora-border">
-                  <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">
-                    Flagship Formula
-                  </p>
-                  <p className="text-base font-light text-nuclora-navy" style={{ fontFamily: "var(--font-cormorant)" }}>
-                    NMN 500mg
-                  </p>
+                <div className="absolute bottom-6 left-6 bg-white px-5 py-4 rounded-2xl shadow-xl border border-nuclora-border">
+                  <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-1">Flagship Formula</p>
+                  <p className="text-lg font-light text-nuclora-navy" style={{ fontFamily: "var(--font-cormorant)" }}>NMN 500mg</p>
                 </div>
-                <div className="absolute top-4 right-4 bg-nuclora-navy px-3 py-2.5 rounded-xl shadow-lg">
-                  <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">
-                    Made with precision
-                  </p>
-                  <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>
-                    in Australia
-                  </p>
+                <div className="absolute top-6 right-6 bg-nuclora-navy px-4 py-3 rounded-xl shadow-lg">
+                  <p className="text-xs font-medium tracking-widest uppercase text-nuclora-gold mb-0.5">Made with precision</p>
+                  <p className="text-sm font-light text-white" style={{ fontFamily: "var(--font-cormorant)" }}>in Australia</p>
                 </div>
               </div>
             </div>
-
           </div>
+
         </div>
       </section>
 
