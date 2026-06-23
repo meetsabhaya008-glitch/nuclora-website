@@ -4,10 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  icons: {
-    icon: "/justlogo.png",
-    apple: "/justlogo.png",
-  },
   title: {
     default: "Nuclora — Advanced Cellular Nutrition Backed by Science",
     template: "%s | Nuclora",
