@@ -19,6 +19,7 @@ export default async function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          overflow: "hidden",
           background: "transparent",
         }}
       >
@@ -28,6 +29,7 @@ export default async function Icon() {
             width: "100%",
             height: "100%",
             objectFit: "contain",
+            transform: "scale(2.8)",
           }}
         />
       </div>
