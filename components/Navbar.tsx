@@ -35,9 +35,10 @@ export default function Navbar() {
           <Image
             src="/nuclora logo.png"
             alt="Nuclora"
-            width={200}
-            height={70}
-            className="h-14 w-auto object-contain"
+            width={220}
+            height={75}
+            className="h-16 w-auto object-contain"
+            style={{ mixBlendMode: "multiply" }}
             priority
           />
         </Link>
