@@ -11,19 +11,18 @@ export default function Icon() {
     (
       <div
         style={{
-          background: "#131929",
           width: "100%",
           height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: "5px",
+          background: "transparent",
         }}
       >
         <span
           style={{
-            color: "#B8906A",
-            fontSize: "22px",
+            color: "#131929",
+            fontSize: "30px",
             fontFamily: "Georgia, serif",
             fontWeight: "400",
             lineHeight: 1,
