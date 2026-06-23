@@ -7,7 +7,7 @@ export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
 export default async function Icon() {
-  const logoBuffer = readFileSync(join(process.cwd(), "public/justlogo.png"));
+  const logoBuffer = readFileSync(join(process.cwd(), "public/newonlylogo.png"));
   const base64 = `data:image/png;base64,${logoBuffer.toString("base64")}`;
 
   return new ImageResponse(
@@ -20,16 +20,14 @@ export default async function Icon() {
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
-          background: "transparent",
         }}
       >
         <img
           src={base64}
           style={{
-            width: "100%",
-            height: "100%",
+            width: "320%",
+            height: "320%",
             objectFit: "contain",
-            transform: "scale(2.8)",
           }}
         />
       </div>
